@@ -38,7 +38,7 @@ func initialize() -> PlayGamesPluginError:
 	
 	if not android_plugin:
 		if Engine.has_singleton(plugin_name):
-			print("Plugin found!")
+			print("GodotPlayGameServices plugin initialized successfully.")
 			
 			android_plugin = Engine.get_singleton(plugin_name)
 			android_plugin.initialize()
@@ -48,7 +48,7 @@ func initialize() -> PlayGamesPluginError:
 			)
 			return PlayGamesPluginError.OK
 		else:
-			printerr("No plugin found!")
+			printerr("GodotPlayGameServices not found. Google Play Games Services will not work.")
 	
 	return PlayGamesPluginError.PLUGIN_NOT_FOUND
 
