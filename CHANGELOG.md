@@ -1,3 +1,7 @@
+## v2.0.1
+### Improve logs on GDScript code
+As suggested by @goranovs in [this Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/47), the logs of the GDScript code when initializing the plugin have been improved to show better messages. Thanks for the collaboration, @goranovs !
+
 ## v2.0.0
 ### Rename all Player related class names
 The Player namespace used in the `PlayersClient` autoload is a very common name for games of all sorts, so I renamed it to be `PlayGamesPlayer` instead. This is a new major version since it breaks backward compatibility, make sure to update your code if you were using a previous version of this plugin.
