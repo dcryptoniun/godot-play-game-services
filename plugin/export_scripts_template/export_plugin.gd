@@ -3,18 +3,10 @@ extends EditorPlugin
 
 const PLUGIN_AUTOLOAD := &"GodotPlayGameServices"
 
-const SIGN_IN_CLIENT_CUSTOM_TYPE := &"PlayGamesSignInClient"
-const ACHIEVEMENTS_CLIENT_CUSTOM_TYPE := &"PlayGamesAchievementsClient"
-const LEADERBOARDS_CLIENT_CUSTOM_TYPE := &"PlayGamesLeaderboardsClient"
-const PLAYERS_CLIENT_CUSTOM_TYPE := &"PlayGamesPlayersClient"
-const SNAPSHOTS_CLIENT_CUSTOM_TYPE := &"PlayGamesSnapshotsClient"
-const EVENTS_CLIENT_CUSTOM_TYPE := &"PlayGamesEventsClient"
-
 var _export_plugin : AndroidExportPlugin
 var _dock : Node
 
 func _enter_tree() -> void:
-	_add_custom_types()
 	_add_plugin()
 	_add_docks()
 	_add_autoloads()
@@ -23,23 +15,6 @@ func _exit_tree() -> void:
 	_remove_plugin()
 	_remove_docks()
 	_remove_autoloads()
-	_remove_custom_types()
-
-func _add_custom_types() -> void:
-	add_custom_type(SIGN_IN_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd"), null)
-	add_custom_type(ACHIEVEMENTS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd"), null)
-	add_custom_type(LEADERBOARDS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd"), null)
-	add_custom_type(PLAYERS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/players/players_client.gd"), null)
-	add_custom_type(SNAPSHOTS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/snapshots/snapshots_client.gd"), null)
-	add_custom_type(EVENTS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/events/events_client.gd"), null)
-
-func _remove_custom_types() -> void:
-	remove_custom_type(EVENTS_CLIENT_CUSTOM_TYPE)
-	remove_custom_type(SNAPSHOTS_CLIENT_CUSTOM_TYPE)
-	remove_custom_type(PLAYERS_CLIENT_CUSTOM_TYPE)
-	remove_custom_type(LEADERBOARDS_CLIENT_CUSTOM_TYPE)
-	remove_custom_type(ACHIEVEMENTS_CLIENT_CUSTOM_TYPE)
-	remove_custom_type(SIGN_IN_CLIENT_CUSTOM_TYPE)
 
 func _add_plugin() -> void:
 	_export_plugin = AndroidExportPlugin.new()
