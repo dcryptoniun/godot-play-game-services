@@ -11,7 +11,7 @@ val pluginPackageName = "com.jacobibanez.plugin.android.godotplaygameservices"
 
 android {
     namespace = pluginPackageName
-    compileSdk = 33
+    compileSdk = 34
 
     buildFeatures {
         buildConfig = true
