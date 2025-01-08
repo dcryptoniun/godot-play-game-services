@@ -1,3 +1,4 @@
+@icon("res://addons/GodotPlayGameServices/assets/icons/snapshots_client.svg")
 class_name PlayGamesSnapshotsClient extends Node
 ## Client with save and load games functionality.
 ##

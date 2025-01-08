@@ -1,3 +1,4 @@
+@icon("res://addons/GodotPlayGameServices/assets/icons/events_client.svg")
 class_name PlayGamesEventsClient extends Node
 ## Client with events functionality.
 ##

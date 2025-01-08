@@ -1,3 +1,4 @@
+@icon("res://addons/GodotPlayGameServices/assets/icons/leaderboards_client.svg")
 class_name PlayGamesLeaderboardsClient extends Node
 ## Client with  leaderboards functionality.
 ##

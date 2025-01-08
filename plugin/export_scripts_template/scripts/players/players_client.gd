@@ -1,3 +1,4 @@
+@icon("res://addons/GodotPlayGameServices/assets/icons/players_client.svg")
 class_name PlayGamesPlayersClient extends Node
 ## Client with player functionality.
 ##

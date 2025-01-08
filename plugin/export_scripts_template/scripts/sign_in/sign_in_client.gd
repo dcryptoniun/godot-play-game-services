@@ -1,3 +1,4 @@
+@icon("res://addons/GodotPlayGameServices/assets/icons/sign_in_client.svg")
 class_name PlayGamesSignInClient extends Node
 ## Client with sign in functionality.
 ##

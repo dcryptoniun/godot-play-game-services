@@ -1,3 +1,4 @@
+@icon("res://addons/GodotPlayGameServices/assets/icons/achievements_client.svg")
 class_name PlayGamesAchievementsClient extends Node
 ## Client with achievements functionality.
 ##
