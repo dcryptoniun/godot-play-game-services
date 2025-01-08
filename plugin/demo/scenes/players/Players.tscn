@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ewhiun7ljryy"]
+[gd_scene load_steps=4 format=3 uid="uid://ewhiun7ljryy"]
 
 [ext_resource type="Theme" uid="uid://bmm3mvq11y045" path="res://theme.tres" id="1_i7feq"]
 [ext_resource type="Script" path="res://scenes/players/Players.gd" id="2_xda1v"]
+[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/players/players_client.gd" id="3_ldpls"]
 
 [node name="Players" type="Control"]
 layout_mode = 3
@@ -96,3 +97,11 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 25
+
+[node name="PlayGamesPlayersClient" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_ldpls")
+
+[connection signal="current_player_loaded" from="PlayGamesPlayersClient" to="." method="_on_current_player_loaded"]
+[connection signal="friends_loaded" from="PlayGamesPlayersClient" to="." method="_on_friends_loaded"]
+[connection signal="player_searched" from="PlayGamesPlayersClient" to="." method="_on_player_searched"]

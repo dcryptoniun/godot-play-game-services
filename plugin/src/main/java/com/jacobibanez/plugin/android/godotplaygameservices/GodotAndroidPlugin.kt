@@ -73,7 +73,6 @@ class GodotAndroidPlugin(godot: Godot) : GodotPlugin(godot) {
     fun initialize() {
         Log.d(pluginName, "Initializing Google Play Game Services")
         PlayGamesSdk.initialize(activity!!)
-        isAuthenticated()
     }
 
     /**

@@ -5,37 +5,52 @@ extends Node
 ## to use it directly. Some autoloads exposing the plugin functionality, as a wrapper
 ## for GDScript code, are also loaded with the plugin.[br]
 ## [br]
-## This Autoload also calls the [code]initialize()[/code] method of the plugin,
-## checking if the user is authenticated.
+## Remember to call the [method initialize] method of the plugin before
+## using it.
 
 ## Signal emitted after an image is downloaded and saved to the device.[br]
 ## [br]
 ## [param file_path]: The path to the stored file.
 signal image_stored(file_path: String)
 
-## Main entry point to the android plugin. With this object, you can call the
+enum PlayGamesPluginError {
+	OK = 0,
+	PLUGIN_NOT_FOUND = 1
+}
+
+## Main entry point to the android plugin. With this object, you can call the 
 ## kotlin methods directly.
 var android_plugin: Object
 
 ## A helper JSON marshaller to safely access JSON data from the plugin.
 var json_marshaller := JsonMarshaller.new()
 
-func _ready() -> void:
+## Call this method manually to initialize the plugin.[br]
+## [br]
+## You have to call this method before you use any of the clients of the plugin.
+## For example, a good place to do so, is in the [code]func _enter_tree() -> void:[/code]
+## virtual method, so when the Node is ready, the plugin is already initialized.[br]
+## [br]
+## Returns [PlayGamesPluginError.OK] if the plugin was initialized properly, or
+## [PlayGamesPluginError.PLUGIN_NOT_FOUND] otherwise.
+func initialize() -> PlayGamesPluginError:
 	var plugin_name := "GodotPlayGameServices"
-
+	
 	if not android_plugin:
 		if Engine.has_singleton(plugin_name):
-			print("GodotPlayGameServices plugin initialized successfully.")
-
+			print("Plugin found!")
+			
 			android_plugin = Engine.get_singleton(plugin_name)
 			android_plugin.initialize()
+			
+			android_plugin.imageStored.connect(func(file_path: String):
+				image_stored.emit(file_path)
+			)
+			return PlayGamesPluginError.OK
 		else:
-			printerr("GodotPlayGameServices not found. Google Play Games Services will not work.")
-
-	if android_plugin:
-		android_plugin.imageStored.connect(func(file_path: String):
-			image_stored.emit(file_path)
-		)
+			printerr("No plugin found!")
+	
+	return PlayGamesPluginError.PLUGIN_NOT_FOUND
 
 ## Displays the given image in the given texture rectangle.[br]
 ## [br]

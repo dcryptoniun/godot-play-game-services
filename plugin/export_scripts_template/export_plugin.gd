@@ -1,29 +1,45 @@
 @tool
 extends EditorPlugin
 
-const JSON_MARSHALLER_SCRIPT := "res://addons/GodotPlayGameServices/marshalling/json_marshaller.gd"
-const PLUGIN_AUTOLOAD := "GodotPlayGameServices"
-const SIGN_IN_AUTOLOAD := "SignInClient"
-const ACHIEVEMENTS_AUTOLOAD := "AchievementsClient"
-const LEADERBOARDS_AUTOLOAD := "LeaderboardsClient"
-const PLAYERS_AUTOLOAD := "PlayersClient"
-const SNAPSHOTS_AUTOLOAD := "SnapshotsClient"
-const EVENTS_AUTOLOAD := "EventsClient"
+const PLUGIN_AUTOLOAD := &"GodotPlayGameServices"
+
+const SIGN_IN_CLIENT_CUSTOM_TYPE := &"PlayGamesSignInClient"
+const ACHIEVEMENTS_CLIENT_CUSTOM_TYPE := &"PlayGamesAchievementsClient"
+const LEADERBOARDS_CLIENT_CUSTOM_TYPE := &"PlayGamesLeaderboardsClient"
+const PLAYERS_CLIENT_CUSTOM_TYPE := &"PlayGamesPlayersClient"
+const SNAPSHOTS_CLIENT_CUSTOM_TYPE := &"PlayGamesSnapshotsClient"
+const EVENTS_CLIENT_CUSTOM_TYPE := &"PlayGamesEventsClient"
 
 var _export_plugin : AndroidExportPlugin
 var _dock : Node
 
-func _enter_tree():
-	add_custom_type("JsonMarshaller", "RefCounted", preload(JSON_MARSHALLER_SCRIPT), null)
+func _enter_tree() -> void:
+	_add_custom_types()
 	_add_plugin()
 	_add_docks()
 	_add_autoloads()
 
-func _exit_tree():
+func _exit_tree() -> void:
 	_remove_plugin()
 	_remove_docks()
 	_remove_autoloads()
-	remove_custom_type("JsonMarshaller")
+	_remove_custom_types()
+
+func _add_custom_types() -> void:
+	add_custom_type(SIGN_IN_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd"), null)
+	add_custom_type(ACHIEVEMENTS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd"), null)
+	add_custom_type(LEADERBOARDS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd"), null)
+	add_custom_type(PLAYERS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/players/players_client.gd"), null)
+	add_custom_type(SNAPSHOTS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/snapshots/snapshots_client.gd"), null)
+	add_custom_type(EVENTS_CLIENT_CUSTOM_TYPE, "Node", preload("res://addons/GodotPlayGameServices/scripts/events/events_client.gd"), null)
+
+func _remove_custom_types() -> void:
+	remove_custom_type(EVENTS_CLIENT_CUSTOM_TYPE)
+	remove_custom_type(SNAPSHOTS_CLIENT_CUSTOM_TYPE)
+	remove_custom_type(PLAYERS_CLIENT_CUSTOM_TYPE)
+	remove_custom_type(LEADERBOARDS_CLIENT_CUSTOM_TYPE)
+	remove_custom_type(ACHIEVEMENTS_CLIENT_CUSTOM_TYPE)
+	remove_custom_type(SIGN_IN_CLIENT_CUSTOM_TYPE)
 
 func _add_plugin() -> void:
 	_export_plugin = AndroidExportPlugin.new()
@@ -34,7 +50,7 @@ func _remove_plugin() -> void:
 	_export_plugin = null
 
 func _add_docks() -> void:
-	var dock_name := "Godot Play Game Services"
+	var dock_name := &"Godot Play Game Services"
 	_dock = preload("res://addons/GodotPlayGameServices/godot_play_game_services_dock.tscn").instantiate()
 	add_control_to_bottom_panel(_dock, dock_name)
 
@@ -43,25 +59,13 @@ func _remove_docks() -> void:
 	_dock.free()
 
 func _add_autoloads() -> void:
-	add_autoload_singleton(PLUGIN_AUTOLOAD, "res://addons/GodotPlayGameServices/autoloads/godot_play_game_services.gd")
-	add_autoload_singleton(SIGN_IN_AUTOLOAD, "res://addons/GodotPlayGameServices/autoloads/sign_in_client.gd")
-	add_autoload_singleton(PLAYERS_AUTOLOAD, "res://addons/GodotPlayGameServices/autoloads/players_client.gd")
-	add_autoload_singleton(ACHIEVEMENTS_AUTOLOAD, "res://addons/GodotPlayGameServices/autoloads/achievements_client.gd")
-	add_autoload_singleton(LEADERBOARDS_AUTOLOAD, "res://addons/GodotPlayGameServices/autoloads/leaderboards_client.gd")
-	add_autoload_singleton(SNAPSHOTS_AUTOLOAD, "res://addons/GodotPlayGameServices/autoloads/snapshots_client.gd")
-	add_autoload_singleton(EVENTS_AUTOLOAD, "res://addons/GodotPlayGameServices/autoloads/events_client.gd")
+	add_autoload_singleton(PLUGIN_AUTOLOAD, "res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd")
 
 func _remove_autoloads() -> void:
-	remove_autoload_singleton(EVENTS_AUTOLOAD)
-	remove_autoload_singleton(SNAPSHOTS_AUTOLOAD)
-	remove_autoload_singleton(LEADERBOARDS_AUTOLOAD)
-	remove_autoload_singleton(ACHIEVEMENTS_AUTOLOAD)
-	remove_autoload_singleton(PLAYERS_AUTOLOAD)
-	remove_autoload_singleton(SIGN_IN_AUTOLOAD)
 	remove_autoload_singleton(PLUGIN_AUTOLOAD)
 
 class AndroidExportPlugin extends EditorExportPlugin:
-	var _plugin_name = "GodotPlayGameServices"
+	var _plugin_name = &"GodotPlayGameServices"
 
 	func _supports_platform(platform):
 		if platform is EditorExportPlatformAndroid:
@@ -79,7 +83,7 @@ class AndroidExportPlugin extends EditorExportPlugin:
 			return PackedStringArray()
 		
 		return PackedStringArray([
-			"com.google.code.gson:gson:2.10.1", 
+			"com.google.code.gson:gson:2.11.0", 
 			"com.google.android.gms:play-services-games-v2:20.1.2"
 			])
 	

@@ -1,4 +1,4 @@
-extends Node
+class_name PlayGamesSignInClient extends Node
 ## Client with sign in functionality.
 ##
 ## This autoload exposes methods and signals to control the player sign in process.[br]

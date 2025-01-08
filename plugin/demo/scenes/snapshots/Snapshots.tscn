@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7l7wp6mdkp3a"]
+[gd_scene load_steps=4 format=3 uid="uid://b7l7wp6mdkp3a"]
 
 [ext_resource type="Theme" uid="uid://bmm3mvq11y045" path="res://theme.tres" id="1_uo6wb"]
 [ext_resource type="Script" path="res://scenes/snapshots/Snapshots.gd" id="2_cdwya"]
+[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/snapshots/snapshots_client.gd" id="3_xn4op"]
 
 [node name="Snapshots" type="Control"]
 layout_mode = 3
@@ -95,3 +96,10 @@ unique_name_in_owner = true
 layout_mode = 2
 disabled = true
 text = "Save Game"
+
+[node name="PlayGamesSnapshotsClient" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_xn4op")
+
+[connection signal="game_loaded" from="PlayGamesSnapshotsClient" to="." method="_on_game_loaded"]
+[connection signal="game_saved" from="PlayGamesSnapshotsClient" to="." method="_on_game_saved"]

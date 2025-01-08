@@ -1,49 +1,49 @@
 extends Control
 
 @onready var back_button: Button = %Back
-
 @onready var search_button: Button = %SearchButton
 @onready var search_display: VBoxContainer = %SearchDisplay
-
 @onready var current_player_display: VBoxContainer = %CurrentPlayerDisplay
-
 @onready var friends_display: VBoxContainer = %FriendsDisplay
+@onready var play_games_players_client: PlayGamesPlayersClient = %PlayGamesPlayersClient
 
-var _current_player: PlayersClient.PlayGamesPlayer
-var _friends_cache: Array[PlayersClient.PlayGamesPlayer] = []
+var _current_player: PlayGamesPlayer
+var _friends_cache: Array[PlayGamesPlayer] = []
 var _player_display := preload("res://scenes/players/PlayerDisplay.tscn")
 
 func _ready() -> void:
 	if not _current_player:
-		PlayersClient.load_current_player(true)
-	PlayersClient.current_player_loaded.connect(func(current_player: PlayersClient.PlayGamesPlayer):
-		var container := _player_display.instantiate() as Control
-		container.player = current_player
-		current_player_display.add_child(container)
-	)
+		play_games_players_client.load_current_player(true)
 	if _friends_cache.is_empty():
-		PlayersClient.load_friends(10, true, true)
-	PlayersClient.friends_loaded.connect(
-		func cache_and_display(friends: Array[PlayersClient.PlayGamesPlayer]):
-			_friends_cache = friends
-			if not _friends_cache.is_empty() and friends_display.get_child_count() == 0:
-				for friend: PlayersClient.PlayGamesPlayer in _friends_cache:
-					var container := _player_display.instantiate() as Control
-					container.player = friend
-					friends_display.add_child(container)
-	)
-	PlayersClient.player_searched.connect(func(player: PlayersClient.PlayGamesPlayer):
-		for child in search_display.get_children():
-			child.queue_free()
-		var container := _player_display.instantiate() as Control
-		container.player = player
-		container.is_comparable = true
-		search_display.add_child(container)
-	)
+		play_games_players_client.load_friends(10, true, true)
 	
 	back_button.pressed.connect(func():
 		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 	)
 	search_button.pressed.connect(func():
-		PlayersClient.search_player()
+		play_games_players_client.search_player()
 	)
+
+func _on_current_player_loaded(current_player: PlayGamesPlayer) -> void:
+	var container := _player_display.instantiate() as Control
+	container.play_games_player = current_player
+	container.play_games_players_client = play_games_players_client
+	current_player_display.add_child(container)
+
+func _on_friends_loaded(friends: Array[PlayGamesPlayer]) -> void:
+	_friends_cache = friends
+	if not _friends_cache.is_empty() and friends_display.get_child_count() == 0:
+		for friend: PlayGamesPlayer in _friends_cache:
+			var container := _player_display.instantiate() as Control
+			container.play_games_player = friend
+			container.play_games_players_client = play_games_players_client
+			friends_display.add_child(container)
+
+func _on_player_searched(player: PlayGamesPlayer) -> void:
+	for child in search_display.get_children():
+		child.queue_free()
+	var container := _player_display.instantiate() as Control
+	container.play_games_player = player
+	container.play_games_players_client = play_games_players_client
+	container.is_comparable = true
+	search_display.add_child(container)
