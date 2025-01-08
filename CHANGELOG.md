@@ -1,3 +1,13 @@
+## v3.0.0
+### Remove autoloads and make them Nodes
+This is a new major version changing the way the plugin is implemented. Instead of creating several autoloads per client, now it creates one main autoload and the clients are Nodes that you can insert to your scenes. More information on how to use it in the [demo project](plugin/demo)
+
+### Remove deprecated signal `userSignedIn`
+The `userSignedIn` (or `user_signed_in` in GDScript) signal has been removed.
+
+### Use Android SDK 34
+The `compileSdk` version has been update to use android SDK 34. The gradle plugin and gradle itself have been also updated to the latest versions.
+
 ## v2.0.1
 ### Improve logs on GDScript code
 As suggested by @goranovs in [this Pull Request](https://github.com/godot-sdk-integrations/godot-play-game-services/pull/47), the logs of the GDScript code when initializing the plugin have been improved to show better messages. Thanks for the collaboration, @goranovs !
