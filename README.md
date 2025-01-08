@@ -7,7 +7,7 @@ If you want to download the plugin for a previous version of Godot 4.x, use the 
 
 ![Plugin Header](github-social-preview.png)
 
-[![Android version and API level 33](https://img.shields.io/badge/Android-API%20Level%2033-darkgreen.svg)](https://developer.android.com)
+[![Android version and API level 34](https://img.shields.io/badge/Android-API%20Level%2034-darkgreen.svg)](https://developer.android.com)
 [![Godot version 4.3](https://img.shields.io/badge/Godot%20Engine-4.3-blue.svg)](https://github.com/godotengine/godot/)
 [![Google Play Game Services version 20.1.2](https://img.shields.io/badge/Play%20Services%20Games%20v2-20.1.2-green.svg)](https://developers.google.com/games/services/android/quickstart)
 
@@ -42,7 +42,12 @@ Thanks also to the [Godot Foundation](https://godot.foundation/) for allowing me
 If you want to contribute, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ## Install the plugin
-Using the plugin requires downloading the assets in the [releases section](https://github.com/Iakobs/godot-play-game-services/releases) of the repository and following the steps described there to copy the plugin folder to your Godot project.
+Using the plugin requires downloading the assets in the [releases section](https://github.com/Iakobs/godot-play-game-services/releases) of the repository and following the steps described there to copy the plugin folder to your Godot project. You can't download this plugin from the [Asset Library](https://godotengine.org/asset-library/asset/2440) directly because of the Android binaries needed. The Sign-In flow has been also changed so now the plugin doesn't make an automatic authentication check.
+
+## Philosophy of the plugin
+This plugin has been revamped since version 3.0. Before, the plugin created several autoloads, one per each feature of the Play Games API (sign in, leaderboards, snapshots, etc.). Now the plugin follows the Godot philosophy of using Nodes, therefore the autoloads have been converted to Nodes, except the main `GodoPlayGamesServices` one, which now requires manual initialization. The Sign-In flow has been also changed so now the plugin doesn't make an automatic authentication check.
+
+![Screenshot of Godot's Create New Node dialog showing the plugin's nodes](docs/images/plugin_nodes.png)
 
 ## The Demo project
 There is a Godot Project in the [demo folder](plugin/demo) of the repository. It contains its own documentation on how to use it, so please, take a look if you want to see how I implemented the basic features of this plugin in a real Godot game.

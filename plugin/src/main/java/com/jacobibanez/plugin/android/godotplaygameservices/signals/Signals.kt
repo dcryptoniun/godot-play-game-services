@@ -52,16 +52,6 @@ object SignInSignals {
      * @return An OAuth 2.0 authorization code as a string.
      */
     var serverSideAccessRequested = SignalInfo("serverSideAccessRequested", String::class.java)
-
-    /**
-     * This signal was emitted when calling the [com.jacobibanez.plugin.android.godotplaygameservices.GodotAndroidPlugin.signIn] method.
-     * Now the method emits the [com.jacobibanez.plugin.android.godotplaygameservices.signals.SignInSignals.userAuthenticated] signal instead.
-     *
-     * @return `true` if the user is signed in. `false` otherwise.
-     *
-     */
-    @Deprecated("This signal is not emitted anymore. The userAuthenticated signal is emitted instead.")
-    val userSignedIn = SignalInfo("userSignedIn", Boolean::class.javaObjectType)
 }
 
 /**
