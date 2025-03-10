@@ -11,7 +11,7 @@ val pluginPackageName = "com.jacobibanez.plugin.android.godotplaygameservices"
 
 android {
     namespace = pluginPackageName
-    compileSdk = 34
+    compileSdk = 35
 
     buildFeatures {
         buildConfig = true
@@ -36,9 +36,9 @@ android {
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.google.android.gms:play-services-games-v2:20.1.2")
-    implementation("org.godotengine:godot:4.3.0.stable")
+    implementation("org.godotengine:godot:4.4.0.stable")
 
     dokkaPlugin("org.jetbrains.dokka:android-documentation-plugin:1.9.10")
 }

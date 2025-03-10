@@ -1,5 +1,7 @@
 # Godot Play Game Services
-Godot 4.3+ plugin for integration of the latest version of [Google Play Game Services SDK](https://developers.google.com/games/services/android/quickstart).
+Godot 4.4+ plugin for integration of the latest version of [Google Play Game Services SDK](https://developers.google.com/games/services/android/quickstart).
+
+This repository is forked from [godot-sdk-integrations/godot-play-game-services](https://github.com/godot-sdk-integrations/godot-play-game-services) and is specifically maintained for Godot 4.4. For older versions of Godot, please visit the original repository.
 
 If you want to download the plugin for a previous version of Godot 4.x, use the branch selector in the repository. For Godot 3.x versions, [look here](https://github.com/Iakobs/godot-google-play-game-services-android-plugin)!
 
@@ -7,9 +9,10 @@ If you want to download the plugin for a previous version of Godot 4.x, use the 
 
 ![Plugin Header](github-social-preview.png)
 
-[![Android version and API level 34](https://img.shields.io/badge/Android-API%20Level%2034-darkgreen.svg)](https://developer.android.com)
-[![Godot version 4.3](https://img.shields.io/badge/Godot%20Engine-4.3-blue.svg)](https://github.com/godotengine/godot/)
+[![Android version and API level 35](https://img.shields.io/badge/Android-API%20Level%2035-darkgreen.svg)](https://developer.android.com)
+[![Godot version 4.4](https://img.shields.io/badge/Godot%20Engine-4.4-blue.svg)](https://github.com/godotengine/godot/)
 [![Google Play Game Services version 20.1.2](https://img.shields.io/badge/Play%20Services%20Games%20v2-20.1.2-green.svg)](https://developers.google.com/games/services/android/quickstart)
+[![Kotlin version 1.9.25](https://img.shields.io/badge/Kotlin-1.9.25-purple.svg)](https://kotlinlang.org/)
 
 ---
 
